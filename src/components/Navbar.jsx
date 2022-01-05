@@ -6,7 +6,7 @@ const Navbar = () => {
   const { user } = useAuthContext();
 
   return (
-    <nav className="w-full flex justify-between bg-rose-600 h-12 p-3 font-mont text-white">
+    <nav className="w-full flex justify-between bg-primary h-12 p-3 font-mont text-white">
       <div>
         <h2 className="uppercase font-bold">Photoviewer</h2>
       </div>

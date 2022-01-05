@@ -23,8 +23,8 @@ const Welcome = () => {
 
   return (
     <div className="h-min-screen flex flex-col justify-center items-center mt-12 ">
-      <h1 className="text-4xl mb-5 text-rose-600 ">Welcome, please log in</h1>
-      {error && <span className="font-bold text-rose-600">{error}</span>}
+      <h1 className="header-lg">Welcome, please log in</h1>
+      {error && <span className="font-bold text-primary">{error}</span>}
       <form onSubmit={handleLogin}>
         <input
           type="email"
@@ -38,16 +38,11 @@ const Welcome = () => {
           ref={password}
           placeholder="Password..."
         />
-        <button className="pt-2 pb-2 pl-6 pr-6 bg-rose-600 text-white font-bold rounded-full ml-2">
-          Login
-        </button>
+        <button className="btn-red">Login</button>
       </form>
-      <h3 className="mt-12 mb-2">Don't have an account?</h3>
+      <h3 className="header-md">Don't have an account?</h3>
 
-      <Link
-        to="/register"
-        className="pt-2 pb-2 pl-6 pr-6 bg-rose-600 text-white font-bold rounded-full"
-      >
+      <Link to="/register" className="btn-red">
         Register
       </Link>
     </div>

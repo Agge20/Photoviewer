@@ -42,9 +42,7 @@ const Register = () => {
           placeholder="Password..."
           type="password"
         />
-        <button className="ml-2 pt-2 pb-2 pl-6 pr-6 bg-rose-600 text-white font-bold rounded-full">
-          Register
-        </button>
+        <button className="btn-red">Register</button>
       </form>
     </div>
   );

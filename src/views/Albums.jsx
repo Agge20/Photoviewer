@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Albums = () => {
   return (
     <div className="flex justify-center flex-col items-center">
-      <h2 className="text-4xl mt-12 mb-6">Here are your albums</h2>
+      <h2 className="header-md">Here are your albums</h2>
       <h3>Add a new album</h3>
       <Link
         to="/albums/create"
@@ -12,7 +12,7 @@ const Albums = () => {
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-16 w-16 text-rose-600"
+          className="h-16 w-16 text-primary"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
