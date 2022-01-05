@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../firebase/index";
 
@@ -12,6 +13,8 @@ const useAuthContext = () => {
 };
 
 const AuthContextProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
   // function to register a new user
   const register = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -22,10 +25,18 @@ const AuthContextProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  useEffect(() => {
+    // run code on auth-change
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  }, []);
+
   // the values that shall be provided to the children
   const contextValues = {
     register,
     login,
+    user,
   };
 
   return (

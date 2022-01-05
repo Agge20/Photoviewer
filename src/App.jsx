@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Welcome from "./views/Welcome";
 import Register from "./views/Register";
 import Albums from "./views/Albums";
+import CreateAlbum from "./views/CreateAlbum";
 // components
 import Navbar from "./components/Navbar";
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Welcome />} />
           <Route path="/register" element={<Register />} />
           <Route path="/albums" element={<Albums />} />
+          <Route path="/albums/create" element={<CreateAlbum />} />
         </Routes>
       </div>
     </main>
