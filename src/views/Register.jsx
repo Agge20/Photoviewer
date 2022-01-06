@@ -27,22 +27,22 @@ const Register = () => {
 
   return (
     <div className="flex flex-col justify-center items-center mt-24">
-      <h2 className="text-4xl mb-6">Signup</h2>{" "}
+      <h2 className="text-4xl mb-6">Register</h2>{" "}
       {error && <span className="font-bold text-rose-600">{error}</span>}
       <form onSubmit={handleRegister}>
         <input
           type="email"
-          className="border-2 rounded-lg"
+          className="input"
           ref={email}
           placeholder="Email..."
         />
         <input
-          className="border-2 ml-2 rounded-lg"
+          className="input"
           ref={password}
           placeholder="Password..."
           type="password"
         />
-        <button className="btn-red">Register</button>
+        <button className="btn-primary ml-2">Register</button>
       </form>
     </div>
   );

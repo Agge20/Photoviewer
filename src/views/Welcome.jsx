@@ -38,11 +38,11 @@ const Welcome = () => {
           ref={password}
           placeholder="Password..."
         />
-        <button className="btn-red">Login</button>
+        <button className="btn-primary ml-2">Login</button>
       </form>
       <h3 className="header-md">Don't have an account?</h3>
 
-      <Link to="/register" className="btn-red">
+      <Link to="/register" className="btn-primary">
         Register
       </Link>
     </div>

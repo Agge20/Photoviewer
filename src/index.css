@@ -3,16 +3,26 @@
 @tailwind utilities;
 
 @layer components {
-  .btn-red {
-    @apply pt-2 pb-2 pl-6 pr-6 bg-primary text-white font-bold rounded-full;
+  .btn-primary {
+    @apply pt-2 pb-2 pl-6 pr-6 mt-5 bg-secondary text-white font-bold rounded-full hover:opacity-80;
   }
   .header-sm {
-    @apply text-2xl mb-5 text-primary;
+    @apply text-2xl mb-5 mt-5 text-primary;
   }
   .header-md {
-    @apply text-3xl mb-5 text-primary mt-12;
+    @apply text-3xl mb-5 mt-5 text-primary;
   }
   .header-lg {
-    @apply text-4xl mb-5 text-primary;
+    @apply text-4xl mb-5 mt-5 text-primary;
+  }
+  .input {
+    @apply border-2 ml-2 rounded-lg shadow-sm;
+    text-indent: 4px;
+  }
+  .success-popup {
+    @apply pt-6 pb-6 pl-12 pr-12 bg-green-500 text-white rounded-md fixed top-8 shadow-xl mx-auto text-base uppercase;
+  }
+  .warning-popup {
+    @apply pt-6 pb-6 pl-12 pr-12 bg-rose-500 text-white rounded-md fixed top-8 shadow-xl mx-auto text-base uppercase;
   }
 }

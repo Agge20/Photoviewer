@@ -6,9 +6,10 @@ const Albums = () => {
     <div className="flex justify-center flex-col items-center">
       <h2 className="header-md">Here are your albums</h2>
       <h3>Add a new album</h3>
+      {/* to create a new album */}
       <Link
         to="/albums/create"
-        className="w-64 h-64 shadow-lg mt-2 flex flex-col justify-center items-center hover:pointer hover:cursor-pointer"
+        className="w-64 h-64 shadow-lg mt-2 flex flex-col justify-center items-center hover:pointer hover:cursor-pointer hover:scale-110 transition ease-out duration-300"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
