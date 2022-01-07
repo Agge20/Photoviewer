@@ -35,6 +35,7 @@ const useCreateAlbum = () => {
       // now we try to combine all the album data and add it as a document
       await addDoc(colRef, {
         ...albumData,
+        images: [],
         coverUrl: downURL,
         createdAt: serverTimestamp(),
         createdBy: user.uid,
