@@ -6,14 +6,14 @@ import { v4 as uuidv4 } from "uuid";
 import { useAuthContext } from "../context/AuthContext";
 
 const useAddImageToAlbum = () => {
-  const [finished, setFinished] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const uuid = uuidv4();
   const { user } = useAuthContext();
 
   const addImage = async (id, imageFile) => {
     setError(false);
-    setFinished(false);
+    setLoading(true);
     // create reference to where to store the image in storage
     const imageRef = ref(storage, `albums/${user.uid}/${id}/${uuid}`);
     // try to upload the image to the album
@@ -32,15 +32,15 @@ const useAddImageToAlbum = () => {
           test: downURL,
         }),
       });
-      setFinished(true);
+      setLoading(false);
     } catch (err) {
       setError(err);
-      setFinished(true);
+      setLoading(false);
     }
   };
 
   return {
-    finished,
+    loading,
     error,
     addImage,
   };

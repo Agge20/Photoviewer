@@ -108,7 +108,9 @@ const CreateAlbum = () => {
           ref={albumDes}
           maxLength="56"
         />
-        <button className="btn-primary">Create Album</button>
+        <button className="btn-primary" disabled={loading}>
+          Create Album
+        </button>
         {finished && (
           <span className="success-popup">Album created successfully 🥳</span>
         )}

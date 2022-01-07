@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 // views
 import Welcome from "./views/Welcome";
 import Register from "./views/Register";
+import Logout from "./views/Logout";
 import Albums from "./views/Albums";
 import Album from "./views/Album";
 import CreateAlbum from "./views/CreateAlbum";
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/albums" element={<Albums />} />
           <Route path="/albums/create" element={<CreateAlbum />} />
           <Route path="/album/:id" element={<Album />} />

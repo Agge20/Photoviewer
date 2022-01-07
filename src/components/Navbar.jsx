@@ -23,17 +23,20 @@ const Navbar = () => {
             >
               Create Album
             </Link>
+            <Link to="/logout">Logout</Link>
           </>
         )}
         {!user && (
+          <>
             <Link to="/" className="font-medium">
               Login
             </Link>
-          ) && (
-            <Link to="/register" className="font-medium">
+
+            <Link to="/register" className="font-medium ml-2">
               Register
             </Link>
-          )}
+          </>
+        )}
       </div>
     </nav>
   );

@@ -7,11 +7,7 @@ const Album = () => {
   const params = useParams();
   const { albumData } = useAlbum(params.id);
 
-  const {
-    finished: imageUploadFinished,
-    error: imageUploadErr,
-    addImage,
-  } = useAddImageToAlbum();
+  const { loading, error: imageUploadErr, addImage } = useAddImageToAlbum();
 
   const onFileChange = async (e) => {
     console.log(e.target.files[0]);
@@ -36,6 +32,7 @@ const Album = () => {
               //onChange={onCoverChange}
               className="input sm:w-64 mb-2"
               onChange={onFileChange}
+              disabled={loading}
             />
           </label>
           {imageUploadErr && <span>{imageUploadErr}</span>}
