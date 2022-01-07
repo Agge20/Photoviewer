@@ -28,6 +28,7 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     // run code on auth-change
     onAuthStateChanged(auth, (user) => {
+      console.log("user changed. User is now: ", user);
       setUser(user);
     });
   }, []);

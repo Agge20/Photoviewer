@@ -3,8 +3,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#342E37",
-        secondary: "#f2af29",
+        primary: "#5863F8",
+        secondary: "#3c47dd",
+      },
+      fontFamily: {
+        body: ["NotoSans"],
       },
     },
   },

@@ -2,15 +2,19 @@ import { useState } from "react";
 
 import { db } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { storage } from "../firebase";
+import { useAuthContext } from "../context/AuthContext";
 
 const useCreateAlbum = () => {
+  const { user } = useAuthContext();
   const [finished, setFinished] = useState(false);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   // create a new album document
   const createAlbum = async (collectionName, albumData, coverFile) => {
+    setError(null);
     setFinished(false);
     setLoading(true);
     console.log("coverFile", coverFile);
@@ -31,18 +35,20 @@ const useCreateAlbum = () => {
       // now we try to combine all the album data and add it as a document
       await addDoc(colRef, {
         ...albumData,
-        url: downURL,
+        coverUrl: downURL,
+        createdAt: serverTimestamp(),
+        createdBy: user.uid,
         coverId,
       });
       setFinished(true);
       setLoading(false);
     } catch (err) {
-      console.log("error uploading cover... ", err);
       setLoading(false);
       setFinished(false);
+      setError(err);
     }
   };
 
-  return { createAlbum, finished, setFinished, loading };
+  return { createAlbum, finished, setFinished, loading, error };
 };
 export default useCreateAlbum;

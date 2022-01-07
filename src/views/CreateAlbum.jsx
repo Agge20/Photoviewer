@@ -2,7 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import useCreateAlbum from "../hooks/useCreateAlbum";
 
 const CreateAlbum = () => {
-  const { createAlbum, finished, setFinished, loading } = useCreateAlbum();
+  const { createAlbum, finished, setFinished, loading, error } =
+    useCreateAlbum();
   const [message, setMessage] = useState(null);
 
   const albumTitle = useRef();
@@ -22,7 +23,7 @@ const CreateAlbum = () => {
       setMessage("Please enter a title and a album cover image...");
       return;
     }
-
+    // create the new album
     await createAlbum(
       "albums",
       {
@@ -31,7 +32,11 @@ const CreateAlbum = () => {
       },
       albumCover
     );
+    albumTitle.current.value = "";
+    albumDes.current.value = "";
+    setAlbumCover(null);
   };
+
   // make message popup disappear
   useEffect(() => {
     const timeId = setTimeout(() => {
@@ -48,45 +53,66 @@ const CreateAlbum = () => {
 
   return (
     <div>
-      <h2 className="header-lg text-center">Create album</h2>
+      <h2 className="header-lg text-center">Create Album</h2>
 
       <form
         onSubmit={handleSubmit}
         className="flex flex-col justify-center items-center"
       >
         {message && <span className="warning-popup">{message}</span>}
-        <label htmlFor="cover" className="mb-2">
-          Album cover
+        <label htmlFor="cover" className="header-sm mb-3">
+          Album Cover
         </label>
-        <input
-          id="cover"
-          type="file"
-          onChange={onCoverChange}
-          className="input sm:w-64 mb-2"
-        />
+        <label className="flex px-8 py-2 bg-primary text-white uppercase cursor-pointer hover:opacity-75 shadow-md rounded-md">
+          Upload
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 ml-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+            />
+          </svg>
+          <input
+            id="cover"
+            type="file"
+            onChange={onCoverChange}
+            className="input sm:w-64 mb-2"
+          />
+        </label>
+
         {albumCover && (
           <img
-            className="w-64 h-64 object-cover shadow-lg"
+            className="w-64 h-64 mt-5 object-cover shadow-lg"
             src={URL.createObjectURL(albumCover)}
             alt="Album Cover"
           />
         )}
 
-        <label className="header-sm">Title</label>
+        <label className="header-sm mb-3">Title</label>
         <input
           className="input w-64 sm:w-96"
           type="text"
           ref={albumTitle}
           maxLength="20"
         />
-        <label className="header-sm">Description</label>
-        <textarea className="input w-64 sm:w-96" ref={albumDes} />
-        <button disabled={loading} className="btn-primary">
-          Create Album...
-        </button>
+        <label className="header-sm mb-3">Description</label>
+        <textarea
+          className="input w-64 sm:w-96"
+          ref={albumDes}
+          maxLength="56"
+        />
+        <button className="btn-primary">Create Album</button>
         {finished && (
           <span className="success-popup">Album created successfully 🥳</span>
         )}
+        {error && <span className="warning-popup">{error}</span>}
       </form>
     </div>
   );

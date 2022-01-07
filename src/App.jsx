@@ -11,7 +11,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <main className="flex items-center flex-col w-full bg-primary">
+    <main className="flex items-center flex-col w-full">
       <div className="max-w-screen-2xl w-full min-h-screen bg-white">
         <Navbar />
         <Routes>
