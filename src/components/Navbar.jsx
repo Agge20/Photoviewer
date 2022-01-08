@@ -23,7 +23,9 @@ const Navbar = () => {
             >
               Create Album
             </Link>
-            <Link to="/logout">Logout</Link>
+            <Link to="/logout" className="hover:text-secondary">
+              Logout
+            </Link>
           </>
         )}
         {!user && (

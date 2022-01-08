@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useGetDocuments from "../hooks/useGetDocuments";
+import useGetAlbums from "../hooks/useGetAlbums";
 import AlbumCard from "../components/AlbumCard.jsx";
 
 const Albums = () => {
-  const { albums } = useGetDocuments();
+  const { albums } = useGetAlbums();
 
   return (
     <div className="flex justify-center flex-col items-center">

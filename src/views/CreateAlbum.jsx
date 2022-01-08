@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import useCreateAlbum from "../hooks/useCreateAlbum";
 
-const CreateAlbum = () => {
+const CreateAlbum = ({ images }) => {
   const { createAlbum, finished, setFinished, loading, error } =
     useCreateAlbum();
   const [message, setMessage] = useState(null);
@@ -30,7 +30,8 @@ const CreateAlbum = () => {
         title: albumTitle.current.value,
         desc: albumDes.current.value,
       },
-      albumCover
+      albumCover,
+      images
     );
     albumTitle.current.value = "";
     albumDes.current.value = "";
@@ -108,7 +109,7 @@ const CreateAlbum = () => {
           ref={albumDes}
           maxLength="56"
         />
-        <button className="btn-primary" disabled={loading}>
+        <button className="btn-primary bg-green-400" disabled={loading}>
           Create Album
         </button>
         {finished && (

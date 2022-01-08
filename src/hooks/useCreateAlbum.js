@@ -13,7 +13,10 @@ const useCreateAlbum = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   // create a new album document
-  const createAlbum = async (collectionName, albumData, coverFile) => {
+  const createAlbum = async (collectionName, albumData, coverFile, images) => {
+    if (images === undefined) {
+      images = [];
+    }
     setError(null);
     setFinished(false);
     setLoading(true);
@@ -35,7 +38,7 @@ const useCreateAlbum = () => {
       // now we try to combine all the album data and add it as a document
       await addDoc(colRef, {
         ...albumData,
-        images: [],
+        images: [...images],
         coverUrl: downURL,
         createdAt: serverTimestamp(),
         createdBy: user.uid,

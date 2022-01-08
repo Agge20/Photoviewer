@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 
-const useGetDocuments = () => {
+const useGetAlbums = () => {
   const { user } = useAuthContext();
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(null);
@@ -54,4 +54,4 @@ const useGetDocuments = () => {
   };
 };
 
-export default useGetDocuments;
+export default useGetAlbums;

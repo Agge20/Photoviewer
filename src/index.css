@@ -9,6 +9,9 @@
   .btn-primary-inverted {
     @apply pt-2 pb-2 pl-6 pr-6 mt-5 bg-white text-primary font-bold rounded-full hover:bg-primary hover:text-white border-primary border-2 hover:scale-110 transition ease-out duration-300;
   }
+  .btn-warning {
+    @apply pt-2 pb-2 pl-6 pr-6 mt-5 bg-rose-600 text-white font-bold rounded-full hover:opacity-80;
+  }
   .header-sm {
     @apply text-2xl mb-5 mt-5 text-primary;
   }
