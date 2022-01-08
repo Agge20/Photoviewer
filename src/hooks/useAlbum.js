@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
-import { doc, onSnapshot, query, orderBy } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 
 const useAlbum = (id) => {
   console.log("id: ", id);

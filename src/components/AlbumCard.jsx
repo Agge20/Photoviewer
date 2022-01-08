@@ -16,7 +16,7 @@ const AlbumCard = ({ album }) => {
       </div>
       <div>
         <h4 className="header-sm ml-2 mb-2 mt-2 p-1">{album.title}</h4>
-        <p className="text-sm ml-2 p-1">{album.desc}</p>
+        <p className="text-sm ml-2 px-1  break-all">{album.desc}</p>
       </div>
     </Link>
   );
