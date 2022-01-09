@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { SRLWrapper } from "simple-react-lightbox";
+import { useNavigate } from "react-router-dom";
 
 // hooks
 import useAlbum from "../hooks/useAlbum";
@@ -14,6 +15,7 @@ import Trashcan from "../svg/Trashcan";
 
 const ReviewAlbum = () => {
   const params = useParams();
+  const navigate = useNavigate();
   const [allImages, setAllImages] = useState([]);
   const [likedImages, setLikedImages] = useState([]);
   const [dislikedImages, setDislikedImages] = useState([]);
@@ -75,6 +77,7 @@ const ReviewAlbum = () => {
       images: likedImages,
       title: albumData.title + dateOfCreation,
     });
+    navigate("/review/finished");
   };
 
   return (
