@@ -1,44 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { useAuthContext } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import NavbarLinks from "./partial/NavbarLinks";
 
 const Navbar = () => {
-  const { user } = useAuthContext();
+  const [showNav, setShowNav] = useState();
 
   return (
-    <nav className="w-full flex justify-between bg-primary h-12 p-3 font-mont text-white rounded-b-xl shadow-xl">
+    <nav className="w-full flex justify-between bg-primary h-12 p-3 font-mont text-white sm:rounded-b-xl shadow-xl">
       <div>
         <h2 className="uppercase font-bold text-white">Photoviewer 📷</h2>
       </div>
-      <div>
-        {/* if user is logged in */}
-        {user && (
-          <>
-            <Link to="/albums" className="font-medium m-2 hover:text-secondary">
-              Albums
-            </Link>
-            <Link
-              to="/albums/create"
-              className="font-medium m-2 hover:text-secondary"
-            >
-              Create Album
-            </Link>
-            <Link to="/logout" className="hover:text-secondary">
-              Logout
-            </Link>
-          </>
-        )}
-        {!user && (
-          <>
-            <Link to="/" className="font-medium">
-              Login
-            </Link>
+      <div
+        className="w-8 h-6 flex flex-col justify-between sm:hidden cursor-pointer  hover:scale-105 transition ease-out duration-200 "
+        onClick={() => setShowNav(!showNav)}
+      >
+        <div className="h-1 w-full bg-white"></div>
+        <div className="h-1 w-full bg-white"></div>
+        <div className="h-1 w-full bg-white"></div>
+      </div>
+      {showNav && (
+        <div className="py-12 bg-primary w-screen absolute top-12 left-0 h-auto sm:hidden flex flex-col justify-center items-center ">
+          <NavbarLinks />
+        </div>
+      )}
 
-            <Link to="/register" className="font-medium ml-2">
-              Register
-            </Link>
-          </>
-        )}
+      <div className="hidden sm:block">
+        <NavbarLinks />
       </div>
     </nav>
   );

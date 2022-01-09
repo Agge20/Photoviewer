@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import useAddImageToAlbum from "../hooks/useAddImageToAlbum";
 import useAlbum from "../hooks/useAlbum";
 import useUpdateAlbum from "../hooks/useUpdateAlbum.js";
 import { SRLWrapper } from "simple-react-lightbox";
 import CreateAlbumFromImgs from "../components/CreateAlbumFromImgs";
+
+// svg
+import Chain from "../svg/Chain";
 
 const Album = () => {
   const params = useParams();
@@ -40,6 +43,25 @@ const Album = () => {
   return (
     <>
       <div className="w-full mt-12">
+        <div className="flex flex-col justify-center items-center">
+          <h2 className="header-md">Review Link</h2>
+          <div className="inline text-center p-2 shadow-md bg-primary text-white">
+            <div className="flex">
+              <span>{`${window.location}/review-album/${params.id}`}</span>
+              <div
+                className="ml-2 cursor-pointer hover:opacity-75"
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `${window.location}/review-album/${params.id}`
+                  );
+                }}
+              >
+                <Chain />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {albumData && (
           <div className="flex flex-col items-center justify-center max-w-96">
             <div className="flex items-start p-6 border-b-2">

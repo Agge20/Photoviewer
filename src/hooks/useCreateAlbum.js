@@ -14,6 +14,8 @@ const useCreateAlbum = () => {
   const [loading, setLoading] = useState(false);
   // create a new album document
   const createAlbum = async (collectionName, albumData, coverFile, images) => {
+    /* if the use has just created an empty album and not 
+    provided any images-data make it an empty array */
     if (images === undefined) {
       images = [];
     }
@@ -33,6 +35,7 @@ const useCreateAlbum = () => {
     try {
       // wait for uploading the cover image
       await uploadBytes(coverRef, coverFile);
+
       // wait for getting the downloadURL from the newly created cover image
       const downURL = await getDownloadURL(coverRef);
       // now we try to combine all the album data and add it as a document
