@@ -10,7 +10,7 @@ import useCreateReviewAlbum from "../hooks/useCreateReviewAlbum";
 import ThumbsUp from "../svg/ThumbsUp";
 import ThumbsDown from "../svg/ThumbsDown";
 import Heart from "../svg/Heart";
-import TrashCan from "../svg/Trashcan";
+import Trashcan from "../svg/Trashcan";
 
 const ReviewAlbum = () => {
   const params = useParams();
@@ -113,7 +113,7 @@ const ReviewAlbum = () => {
           <div>
             <div className="flex items-center">
               <h3 className="header-sm mr-2 mb-0">Images to remove</h3>
-              <TrashCan />
+              <Trashcan />
             </div>
             <span className="italic text-primary">
               (click on image to delete it)

@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useState, useRef } from "react";
+import { useParams } from "react-router-dom";
 import useAddImageToAlbum from "../hooks/useAddImageToAlbum";
 import useAlbum from "../hooks/useAlbum";
 import useUpdateAlbum from "../hooks/useUpdateAlbum.js";
 import { SRLWrapper } from "simple-react-lightbox";
 import CreateAlbumFromImgs from "../components/CreateAlbumFromImgs";
 import useDeleteAlbum from "../hooks/useDeleteAlbum";
+import useDeleteImage from "../hooks/useDeleteImage";
 
 // svg
 import Chain from "../svg/Chain";
+import Plus from "../svg/Plus";
+import TrashcanWhite from "../svg/TrashcanWhite";
 
 const Album = () => {
   const params = useParams();
@@ -16,6 +19,7 @@ const Album = () => {
   const [showTitleEditor, setShowTitleEditor] = useState(false);
   const [newAlbumImages, setNewAlbumImages] = useState([]);
   const { deleteAlbum } = useDeleteAlbum();
+  const { deleteImage } = useDeleteImage();
 
   const { updateTitle } = useUpdateAlbum(params.id);
   const { albumData } = useAlbum(params.id);
@@ -44,6 +48,10 @@ const Album = () => {
 
   const onDelete = () => {
     deleteAlbum(params.id);
+  };
+
+  const handleDeleteImage = (imgId) => {
+    deleteImage(imgId, params.id);
   };
 
   return (
@@ -166,27 +174,22 @@ const Album = () => {
               {albumData.images.length > 0 &&
                 albumData.images.map((img) => (
                   <div key={img.id}>
-                    <button
-                      onClick={() =>
-                        addNewAlbumImage({ id: img.id, downUrl: img.downUrl })
-                      }
-                      className="h-8 w-8 mb-2 z-10 flex justify-center items-center bg-primary rounded-lg hover:bg-green-600"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-white"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                    <div className="flex">
+                      <button
+                        onClick={() =>
+                          addNewAlbumImage({ id: img.id, downUrl: img.downUrl })
+                        }
+                        className="h-8 w-8 mb-2 z-10 flex justify-center items-center bg-primary rounded-lg hover:bg-green-600"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 4v16m8-8H4"
-                        />
-                      </svg>
-                    </button>
+                        <Plus />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteImage(img.id)}
+                        className="h-8 w-8 mb-2 ml-1 z-10 flex justify-center items-center bg-rose-600 rounded-lg hover:opacity-75"
+                      >
+                        <TrashcanWhite />
+                      </button>
+                    </div>
                     <img
                       src={img.downUrl}
                       alt={img.id}

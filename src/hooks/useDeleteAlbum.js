@@ -39,8 +39,6 @@ const useDeleteAlbum = () => {
     } catch (err) {
       setError(err);
     }
-
-    // const albumRef = ref(storage, "images/desert.jpg");
   };
   return {
     deleteAlbum,
