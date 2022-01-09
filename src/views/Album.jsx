@@ -5,6 +5,7 @@ import useAlbum from "../hooks/useAlbum";
 import useUpdateAlbum from "../hooks/useUpdateAlbum.js";
 import { SRLWrapper } from "simple-react-lightbox";
 import CreateAlbumFromImgs from "../components/CreateAlbumFromImgs";
+import useDeleteAlbum from "../hooks/useDeleteAlbum";
 
 // svg
 import Chain from "../svg/Chain";
@@ -14,6 +15,7 @@ const Album = () => {
   const newTitle = useRef();
   const [showTitleEditor, setShowTitleEditor] = useState(false);
   const [newAlbumImages, setNewAlbumImages] = useState([]);
+  const { deleteAlbum } = useDeleteAlbum();
 
   const { updateTitle } = useUpdateAlbum(params.id);
   const { albumData } = useAlbum(params.id);
@@ -38,6 +40,10 @@ const Album = () => {
   // to add images to a new album
   const addNewAlbumImage = (data) => {
     setNewAlbumImages([...newAlbumImages, data]);
+  };
+
+  const onDelete = () => {
+    deleteAlbum(params.id);
   };
 
   return (
@@ -117,6 +123,14 @@ const Album = () => {
                 disabled={loading}
               />
             </label>
+            <div>
+              <button
+                className="bg-rose-600 btn-primary"
+                onClick={() => onDelete()}
+              >
+                Delete Album
+              </button>
+            </div>
             {/* create new album in album */}
             <CreateAlbumFromImgs images={newAlbumImages} />
             {imageUploadErr && <span>{imageUploadErr}</span>}
@@ -149,7 +163,7 @@ const Album = () => {
         {albumData && (
           <SRLWrapper>
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16">
-              {albumData.images.length &&
+              {albumData.images.length > 0 &&
                 albumData.images.map((img) => (
                   <div key={img.id}>
                     <button

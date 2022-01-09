@@ -14,8 +14,11 @@ const useAddImageToAlbum = () => {
   const addImage = async (id, imageFile) => {
     setError(false);
     setLoading(true);
+    const extension = imageFile.name.substring(
+      imageFile.name.lastIndexOf(".") + 1
+    );
     // create reference to where to store the image in storage
-    const imageRef = ref(storage, `albums/${user.uid}/${id}/${uuid}`);
+    const imageRef = ref(storage, `albums/${id}/${uuid}.${extension}`);
     // try to upload the image to the album
     try {
       await uploadBytes(imageRef, imageFile);
@@ -29,7 +32,7 @@ const useAddImageToAlbum = () => {
         images: arrayUnion({
           downUrl: downURL,
           id: uuid,
-          test: downURL,
+          imagePath: `albums/${id}/${uuid}.${extension}`,
         }),
       });
       setLoading(false);
