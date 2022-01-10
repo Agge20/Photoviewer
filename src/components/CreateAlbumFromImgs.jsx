@@ -61,7 +61,7 @@ const CreateAlbumFromImgs = ({ images }) => {
         <h3 className="header-sm text-center border-b-2 pb-2">
           Selected Images
         </h3>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap justify-center">
           {images &&
             images.map((image, index) => (
               <img
