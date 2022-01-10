@@ -27,10 +27,7 @@ function App() {
           <Route path="/" element={<Welcome />} />
           <Route path="/register" element={<Register />} />
           <Route path="/logout" element={<Logout />} />
-          <Route
-            path="/album/:albumId/review-album/:id"
-            element={<ReviewAlbum />}
-          />
+          <Route path="/review-album/:id" element={<ReviewAlbum />} />
           <Route path="/review/finished" element={<ReviewFinished />} />
           {/* "protected" routes */}
           <Route path="/albums" element={user ? <Albums /> : <Welcome />} />

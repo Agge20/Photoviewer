@@ -61,12 +61,12 @@ const Album = () => {
           <h2 className="header-md">Review Link</h2>
           <div className="inline text-center p-2 shadow-md bg-primary text-white">
             <div className="flex">
-              <span>{`${window.location}/review-album/${params.id}`}</span>
+              <span>{`${window.origin}/review-album/${params.id}`}</span>
               <div
                 className="ml-2 cursor-pointer hover:opacity-75"
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    `${window.location}/review-album/${params.id}`
+                    `${window.origin}/review-album/${params.id}`
                   );
                 }}
               >
