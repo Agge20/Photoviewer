@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useGetAlbums from "../hooks/useGetAlbums";
 import AlbumCard from "../components/AlbumCard.jsx";
+import { useAuthContext } from "../context/AuthContext";
 
 const Albums = () => {
+  const { user } = useAuthContext();
   const { albums } = useGetAlbums();
 
   return (
     <div className="flex justify-center flex-col items-center">
-      <h2 className="header-lg mt-16">Here are your albums</h2>
-      <div className="flex flex-wrap">
+      {user && (
+        <div className="mt-2 flex justify-center text-center">
+          <p>
+            Hello, you are logged in as:
+            <span className="text-primary"> {user.email}</span>
+          </p>
+        </div>
+      )}
+      <h2 className="header-sm sm:header-lg mt-16">Here are your albums</h2>
+      <div className="flex flex-wrap justify-center">
         {/* to create a new album */}
         <Link
           to="/albums/create"

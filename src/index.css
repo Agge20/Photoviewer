@@ -25,7 +25,7 @@
     @apply text-4xl mb-5 mt-5 text-primary;
   }
   .input {
-    @apply border-2 ml-2 rounded-lg shadow-sm;
+    @apply border-2 border-primary ml-2 mt-2 rounded-lg shadow-sm;
     text-indent: 4px;
   }
   .success-popup {

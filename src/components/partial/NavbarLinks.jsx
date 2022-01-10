@@ -11,19 +11,19 @@ const NavbarLinks = () => {
         <>
           <Link
             to="/albums"
-            className="font-medium mb-4  hover:text-secondary text-base sm:text-base border-b-2 sm:border-none pb-2"
+            className="mb-2 ml-0 sm:mb-4 sm:ml-4 text-lg sm:text-base border-b-2 sm:border-none p-2 sm:p-0 hover:opacity-75"
           >
             Albums
           </Link>
           <Link
             to="/albums/create"
-            className="font-medium mb-4 ml-4 hover:text-secondary text-base  sm:text-base border-b-2 sm:border-none pb-2"
+            className="mb-2 ml-0 sm:mb-4 sm:ml-4 text-lg sm:text-base border-b-2 sm:border-none p-2 sm:p-0 hover:opacity-75"
           >
             Create Album
           </Link>
           <Link
             to="/logout"
-            className="hover:text-secondary text-base mb-2 ml-4 sm:text-base border-b-2 sm:border-none pb-2 "
+            className="mb-2 ml-0 sm:mb-4 sm:ml-4 text-lg sm:text-base border-b-2 sm:border-none p-2 sm:p-0 hover:opacity-75"
           >
             Logout
           </Link>
@@ -33,14 +33,14 @@ const NavbarLinks = () => {
         <>
           <Link
             to="/"
-            className="font-medium text-base mb-2 ml-4 sm:text-base border-b-2 sm:border-none pb-2 "
+            className="mb-2 ml-0 sm:mb-4 sm:ml-4 text-lg sm:text-base border-b-2 sm:border-none p-2 sm:p-0 hover:opacity-75"
           >
             Login
           </Link>
 
           <Link
             to="/register"
-            className="font-medium ml-2 mb-4 text-base sm:text-base border-b-2 sm:border-none pb-2"
+            className="mb-2 ml-0 sm:mb-4 sm:ml-4 text-lg sm:text-base border-b-2 sm:border-none p-2 sm:p-0 hover:opacity-75"
           >
             Register
           </Link>

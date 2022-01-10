@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavbarLinks from "./partial/NavbarLinks";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const [showNav, setShowNav] = useState();
-
+  const navigate = useNavigate();
+  const [showNav, setShowNav] = useState(false);
+  // hide nav when you enter a new route
+  useEffect(() => {
+    setShowNav(false);
+  }, [navigate]);
   return (
     <nav className="w-full flex justify-between bg-primary h-12 p-3 font-mont text-white sm:rounded-b-xl shadow-xl">
       <div>
