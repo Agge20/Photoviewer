@@ -23,26 +23,31 @@ const Welcome = () => {
 
   return (
     <div className="h-min-screen flex flex-col justify-center items-center mt-12 ">
-      <h1 className="header-lg">Welcome, please log in</h1>
+      <h1 className="header-md sm:header-lg p-2 text-center">
+        Welcome, please log in
+      </h1>
       {error && <span className="font-bold text-primary">{error}</span>}
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          className="border-2 rounded-lg"
-          ref={email}
-          placeholder="Email..."
-        />
-        <input
-          type="password"
-          className="border-2 ml-2 rounded-lg"
-          ref={password}
-          placeholder="Password..."
-        />
-        <button className="btn-primary ml-2">Login</button>
+      <form onSubmit={handleLogin} className="flex flex-wrap">
+        <div className="flex flex-wrap justify-center items-center w-full sm:w-auto">
+          <input
+            type="email"
+            className="input"
+            ref={email}
+            placeholder="Email..."
+          />
+          <input
+            type="password"
+            className="input"
+            ref={password}
+            placeholder="Password..."
+          />
+        </div>
+        <div className="flex justify-center items-center w-full sm:w-auto mb-8 sm:mb-0">
+          <button className="btn-primary ml-2 mt-2">Login</button>
+        </div>
       </form>
-      <h3 className="header-md">Don't have an account?</h3>
-
-      <Link to="/register" className="btn-primary">
+      <h3 className="header-md mb-2 text-center">Don't have an account?</h3>
+      <Link to="/register" className="btn-primary mt-0">
         Register
       </Link>
     </div>
