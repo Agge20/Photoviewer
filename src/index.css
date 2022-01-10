@@ -1,5 +1,50 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn-primary {
+    @apply pt-2 pb-2 pl-6 pr-6 mt-5 bg-primary text-white font-bold rounded-full hover:opacity-80;
+  }
+  .btn-primary-inverted {
+    @apply pt-2 pb-2 pl-6 pr-6 mt-5 bg-white text-primary font-bold rounded-full hover:bg-primary hover:text-white border-primary border-2 hover:scale-110 transition ease-out duration-300;
+  }
+  .btn-warning {
+    @apply pt-2 pb-2 pl-6 pr-6 mt-5 bg-rose-600 text-white font-bold rounded-full hover:opacity-80;
+  }
+  .btn-warning--yellow {
+    @apply pt-2 pb-2 pl-6 pr-6 mt-5 bg-yellow-400 text-white font-bold rounded-full hover:opacity-80;
+  }
+  .header-sm {
+    @apply text-2xl mb-5 mt-5 text-primary;
+  }
+  .header-md {
+    @apply text-3xl mb-5 mt-5 text-primary;
+  }
+  .header-lg {
+    @apply text-4xl mb-5 mt-5 text-primary;
+  }
+  .input {
+    @apply border-2 border-primary ml-2 mt-2 rounded-lg shadow-sm;
+    text-indent: 4px;
+  }
+  .success-popup {
+    @apply pt-6 pb-6 pl-12 pr-12 bg-green-500 text-white rounded-md fixed top-8 shadow-xl mx-auto text-base uppercase;
+  }
+  .warning-popup {
+    @apply pt-6 pb-6 pl-12 pr-12 bg-rose-500 text-white rounded-md fixed top-8 shadow-xl mx-auto text-base uppercase;
+  }
+  .warning {
+    @apply text-rose-600 font-bold text-md;
+  }
+}
+
+input[type="file"] {
+  display: none;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
