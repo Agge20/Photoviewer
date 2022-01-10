@@ -98,14 +98,14 @@ const CreateAlbum = ({ images }) => {
 
         <label className="header-sm mb-3">Title</label>
         <input
-          className="input w-64 sm:w-96"
+          className="input w-56  sm:w-96"
           type="text"
           ref={albumTitle}
           maxLength="19"
         />
         <label className="header-sm mb-3">Description</label>
         <textarea
-          className="input w-64 sm:w-96"
+          className="input w-56 sm:w-96"
           ref={albumDes}
           maxLength="56"
         />

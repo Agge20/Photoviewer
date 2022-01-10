@@ -60,10 +60,10 @@ const Album = () => {
         <div className="flex flex-col justify-center items-center">
           <h2 className="header-md">Review Link</h2>
           <div className="inline text-center p-2 shadow-md bg-primary text-white">
-            <div className="flex">
-              <span>{`${window.origin}/review-album/${params.id}`}</span>
+            <div className="flex flex-col justify-center items-center">
+              <span className="whitespace-pre-line">{`${window.origin}/review-album/${params.id}`}</span>
               <div
-                className="ml-2 cursor-pointer hover:opacity-75"
+                className="ml-2 mt-2 cursor-pointer hover:opacity-75"
                 onClick={() => {
                   navigator.clipboard.writeText(
                     `${window.origin}/review-album/${params.id}`
@@ -78,19 +78,21 @@ const Album = () => {
 
         {albumData && (
           <div className="flex flex-col items-center justify-center max-w-96">
-            <div className="flex items-start p-6 border-b-2">
+            <div className="flex flex-col items-center sm:items-start sm:flex-row p-6 border-b-2">
               <img
                 src={albumData.coverUrl}
                 alt={albumData.title}
-                className="w-32 h-32 object-cover rounded-md"
+                className="w-32 h-32 object-cover rounded-md mb-2"
               />
               <div>
                 {!showTitleEditor && (
                   <div className="flex items-center">
-                    <h2 className="header-md mt-0 ml-5">{albumData.title}</h2>
+                    <h2 className="header-sm sm:header-md mt-0 ml-5 mb-0">
+                      {albumData.title}
+                    </h2>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 mb-5 ml-2 text-primary hover:opacity-75 cursor-pointer"
+                      className="h-6 w-6 mb-0 ml-2 sm:ml-2 text-primary hover:opacity-75 cursor-pointer"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -138,12 +140,12 @@ const Album = () => {
           </div>
         )}
       </div>
-      <div className="mb-8 flex">
+      <div className="mb-8 flex flex-col sm:flex-row justify-center items-center">
         <button
-          className="btn-warning--yellow flex"
+          className="btn-warning--yellow flex w-48"
           onClick={() => setNewAlbumImages([])}
         >
-          Clear Selected{" "}
+          Clear Selected
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 ml-1"
@@ -160,20 +162,20 @@ const Album = () => {
           </svg>
         </button>
         <button
-          className="bg-rose-600 btn-primary flex ml-2"
+          className="bg-rose-600 btn-primary flex sm:ml-2 w-48"
           onClick={() => onDelete()}
         >
           Delete Album <TrashcanWhite />
         </button>
       </div>
-      <div className="w-full">
+      <div className="w-full p-5">
         {albumData && (
           <SRLWrapper>
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16">
               {albumData.images.length > 0 &&
                 albumData.images.map((img) => (
                   <div key={img.id}>
-                    <div className="flex">
+                    <div className="flex justify-center">
                       <button
                         onClick={() =>
                           addNewAlbumImage({ id: img.id, downUrl: img.downUrl })
@@ -192,7 +194,7 @@ const Album = () => {
                     <img
                       src={img.downUrl}
                       alt={img.id}
-                      className="w-full max-h-96 object-contain hover:cursor-pointer hover:scale-110 transition ease-out duration-300"
+                      className="w-full max-h-96 object-contain hover:cursor-pointer hover:scale-105 transition ease-out duration-300"
                     />
                   </div>
                 ))}
