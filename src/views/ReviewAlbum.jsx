@@ -84,7 +84,9 @@ const ReviewAlbum = () => {
     <div>
       <div className="border-b-2 my-12">
         {albumData && (
-          <h2 className="header-lg text-center">{albumData.title}</h2>
+          <h2 className="header-md sm:header-lg text-center">
+            {albumData.title}
+          </h2>
         )}
       </div>
       {likedImages.length > 0 && (
@@ -98,7 +100,7 @@ const ReviewAlbum = () => {
               (click on image to delete it)
             </span>
           </div>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap justify-center">
             {likedImages.map((image, index) => (
               <img
                 className="w-32 h-32 object-cover shadow-md m-2 border-green-600 border-4 hover:opacity-75 cursor-pointer hover:border-rose-600 hover:border-8"
@@ -122,7 +124,7 @@ const ReviewAlbum = () => {
               (click on image to delete it)
             </span>
           </div>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap justify-center">
             {dislikedImages.map((image, index) => (
               <img
                 className="w-32 h-32 object-cover shadow-md m-2 border-rose-600 border-4 hover:border-8 hover:opacity-75 cursor-pointer"
@@ -146,7 +148,7 @@ const ReviewAlbum = () => {
       )}
 
       <SRLWrapper>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-4 p-5">
           {allImages &&
             allImages.map((image) => (
               <div key={image.id}>
@@ -167,7 +169,7 @@ const ReviewAlbum = () => {
                 <img
                   src={image.downUrl}
                   alt={image.id}
-                  className="w-full max-h-96 object-contain hover:cursor-pointer hover:scale-110 transition ease-out duration-300"
+                  className="w-full max-h-96 object-contain hover:cursor-pointer hover:scale-105 transition ease-out duration-300"
                 />
               </div>
             ))}
