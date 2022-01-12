@@ -59,6 +59,7 @@ const Album = () => {
 
   // to add images to a new album
   const addNewAlbumImage = (data) => {
+    console.log("data addNewAlbumImage: ", data);
     setNewAlbumImages([...newAlbumImages, data]);
   };
 
@@ -200,7 +201,11 @@ const Album = () => {
                     <div className="flex justify-center">
                       <button
                         onClick={() =>
-                          addNewAlbumImage({ id: img.id, downUrl: img.downUrl })
+                          addNewAlbumImage({
+                            id: img.id,
+                            downUrl: img.downUrl,
+                            imagePath: img.imagePath,
+                          })
                         }
                         className="h-8 w-8 mb-2 z-10 flex justify-center items-center bg-primary rounded-lg hover:bg-green-600"
                       >
