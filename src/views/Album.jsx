@@ -23,7 +23,7 @@ const Album = () => {
   const { deleteImage } = useDeleteImage();
 
   const { updateTitle } = useUpdateAlbum(params.id);
-  const { albumData } = useAlbum(params.id);
+  const { albumData, unAuthUser } = useAlbum(params.id);
   const {
     loading,
     error: imageUploadErr,
@@ -41,8 +41,6 @@ const Album = () => {
         await addImage(params.id, e.target.files[i]);
       }
     }
-
-    console.log("e.target.files: ", e.target.files);
   };
 
   // to change the current album title
@@ -159,6 +157,7 @@ const Album = () => {
           </div>
         )}
       </div>
+
       <div className="mb-8 flex flex-col sm:flex-row justify-center items-center">
         <button
           className="btn-warning--yellow flex w-48"
@@ -187,6 +186,12 @@ const Album = () => {
           Delete Album <TrashcanWhite />
         </button>
       </div>
+      {unAuthUser && (
+        <h2 className="header-md sm:header-lg text-red-600 sm:text-red-600 text-center">
+          You are not the owner of this album
+        </h2>
+      )}
+
       <div className="w-full p-5">
         {albumData && (
           <SRLWrapper>

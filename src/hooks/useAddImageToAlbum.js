@@ -1,11 +1,6 @@
 import { useState } from "react";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
-import {
-  ref,
-  getDownloadURL,
-  uploadBytes,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage, db } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
 
