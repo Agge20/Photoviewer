@@ -1,7 +1,11 @@
+// packages
 import React, { useState } from "react";
+
+// views
 import CreateAlbum from "../views/CreateAlbum";
 
 const CreateAlbumFromImgs = ({ images }) => {
+  // toggle-state if should show create album inside a album
   const [showCreateAlbum, setShowCreateAlbum] = useState(false);
   return (
     <div className="flex flex-col mb-12">

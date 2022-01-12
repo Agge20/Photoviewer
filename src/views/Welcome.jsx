@@ -1,14 +1,16 @@
 import React, { useRef, useState } from "react";
-import { useAuthContext } from "../context/AuthContext";
+// packages
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+// context
+import { useAuthContext } from "../context/AuthContext";
 
 const Welcome = () => {
+  const navigate = useNavigate();
+  const { login } = useAuthContext();
   const [error, setError] = useState(null);
   const email = useRef();
   const password = useRef();
-  const navigate = useNavigate();
-  const { login } = useAuthContext();
 
   const handleLogin = async (e) => {
     e.preventDefault();

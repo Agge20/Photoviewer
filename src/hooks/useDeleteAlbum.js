@@ -1,26 +1,28 @@
 import { useState } from "react";
+// packages
+import { useNavigate } from "react-router-dom";
+// firebase
 import { doc, deleteDoc, getDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import { db, storage } from "../firebase/index";
-import { useNavigate } from "react-router-dom";
 
 const useDeleteAlbum = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate();
+  // function to delete an album-document and its respective images in storage
   const deleteAlbum = async (id) => {
     setError(null);
     // get the album doc ref
     const docRef = doc(db, "albums", id);
-
+    // get the album
     const album = await getDoc(docRef);
+    // get the album-data
     const albumData = album.data();
 
-    console.log(albumData);
     // loop through each album image and delete it from storage
-
     for (const img of albumData.images) {
-      // Create a reference to the file to delete
+      // create a reference to the file to delete
       const imageRef = ref(storage, img.imagePath);
 
       try {

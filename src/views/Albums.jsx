@@ -1,8 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
+// packages
 import { Link } from "react-router-dom";
+// hooks
 import useGetAlbums from "../hooks/useGetAlbums";
+// components
 import AlbumCard from "../components/AlbumCard.jsx";
+// context
 import { useAuthContext } from "../context/AuthContext";
+// svg
+import PlusCirclePurple from "../svg/PlusCirclePurple";
 
 const Albums = () => {
   const { user } = useAuthContext();
@@ -27,20 +33,7 @@ const Albums = () => {
         hover:pointer hover:cursor-pointer hover:scale-110 transition ease-out duration-300 
         hover:after:content-['Create_New_Album'] after:content-['Create_New_Album'] text-white hover:text-primary uppercase"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-16 w-16 text-primary"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+          <PlusCirclePurple />
         </Link>
         {albums &&
           albums.map((album) => <AlbumCard key={album.id} album={album} />)}

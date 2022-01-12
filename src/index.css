@@ -29,10 +29,10 @@
     text-indent: 4px;
   }
   .success-popup {
-    @apply pt-6 pb-6 pl-12 pr-12 bg-green-500 text-white rounded-md fixed top-8 shadow-xl mx-auto text-base uppercase;
+    @apply pt-6 pb-6 pl-12 pr-12 bg-green-500 text-white rounded-md fixed top-8 shadow-xl mx-auto text-base uppercase z-20 text-center;
   }
   .warning-popup {
-    @apply pt-6 pb-6 pl-12 pr-12 bg-rose-500 text-white rounded-md fixed top-8 shadow-xl mx-auto text-base uppercase;
+    @apply pt-6 pb-6 pl-12 pr-12 bg-rose-500 text-white rounded-md fixed top-8 shadow-xl mx-auto text-base uppercase z-20 text-center;
   }
   .warning {
     @apply text-rose-600 font-bold text-md;

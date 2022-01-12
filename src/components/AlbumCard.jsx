@@ -1,6 +1,8 @@
+// packages
 import React from "react";
 import { Link } from "react-router-dom";
 
+// component that renders a small album box/card on the albums page
 const AlbumCard = ({ album }) => {
   return (
     <Link

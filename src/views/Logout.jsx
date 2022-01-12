@@ -7,10 +7,13 @@ const Logout = () => {
   const { logout } = useAuthContext();
   const navigate = useNavigate();
 
-  useEffect(async () => {
-    await logout();
-    console.log("user logged out");
+  useEffect(() => {
+    const logoutNow = async () => {
+      await logout();
+    };
+    logoutNow();
     navigate("/");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

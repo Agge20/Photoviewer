@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useAuthContext } from "../context/AuthContext";
+// packages
 import { useNavigate } from "react-router-dom";
+// context
+import { useAuthContext } from "../context/AuthContext";
 
 const Register = () => {
   const { register } = useAuthContext();
@@ -9,14 +11,9 @@ const Register = () => {
   const password = useRef();
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    console.log("email value is now: ", email.current.value);
-    console.log("password value is now: ", password.current.value);
-  }, [email, password]);
-
   const handleRegister = async (e) => {
     e.preventDefault();
-
+    // try and create a new auth-user
     try {
       await register(email.current.value, password.current.value);
       navigate("/");

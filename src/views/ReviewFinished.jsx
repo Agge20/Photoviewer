@@ -1,5 +1,6 @@
 import React from "react";
 
+// here you are redirected when you are finished with a review
 const ReviewFinished = () => {
   return (
     <div className="min-h-screen flex justify-center items-center">

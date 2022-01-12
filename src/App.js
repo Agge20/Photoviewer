@@ -11,6 +11,7 @@ import Album from "./views/Album";
 import CreateAlbum from "./views/CreateAlbum";
 import ReviewAlbum from "./views/ReviewAlbum";
 import ReviewFinished from "./views/ReviewFinished";
+
 // components
 import Navbar from "./components/Navbar";
 

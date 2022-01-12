@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { doc, deleteDoc, getDoc, updateDoc } from "firebase/firestore";
+// firebase
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import { db, storage } from "../firebase/index";
 
+// hook to delete a single image from an album
 const useDeleteImage = () => {
   const [error, setError] = useState(null);
 
@@ -10,15 +12,13 @@ const useDeleteImage = () => {
     const albumRef = doc(db, "albums", albumId);
     const album = await getDoc(albumRef);
     const albumData = album.data();
-
+    // loop through the album-images and check which image has a macthed id
     const imageToDelete = albumData.images.filter((img) => img.id === id);
     const imageRef = ref(storage, imageToDelete[0].imagePath);
-
+    // return all the images that shall remain
     const newAlbumImages = albumData.images.filter((img) => img.id !== id);
-
     // try to delete the image from storage
     try {
-      // try to delete the image from storage
       await deleteObject(imageRef);
       await updateDoc(albumRef, {
         images: [...newAlbumImages],
