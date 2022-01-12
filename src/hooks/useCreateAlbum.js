@@ -1,17 +1,20 @@
 import { useState } from "react";
-
+// firebase
 import { db } from "../firebase";
-import { v4 as uuidv4 } from "uuid";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { storage } from "../firebase";
+// packages
+import { v4 as uuidv4 } from "uuid";
+// context
 import { useAuthContext } from "../context/AuthContext";
 
+// hook for creating an album
 const useCreateAlbum = () => {
   const { user } = useAuthContext();
-  const [finished, setFinished] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [finished, setFinished] = useState(false);
   // create a new album document
   const createAlbum = async (collectionName, albumData, coverFile, images) => {
     /* if the use has just created an empty album and not 
@@ -22,8 +25,7 @@ const useCreateAlbum = () => {
     setError(null);
     setFinished(false);
     setLoading(true);
-    console.log("coverFile", coverFile);
-    console.log("albumData: ", albumData);
+
     // get the collection reference
     const colRef = collection(db, collectionName);
     // create unique id for cover-image file

@@ -1,5 +1,7 @@
+// packages
 import React from "react";
 import { Link } from "react-router-dom";
+// hooks
 import { useAuthContext } from "../../context/AuthContext";
 
 const NavbarLinks = () => {

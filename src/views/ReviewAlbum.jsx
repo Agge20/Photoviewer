@@ -16,13 +16,13 @@ import Trashcan from "../svg/Trashcan";
 const ReviewAlbum = () => {
   const params = useParams();
   const navigate = useNavigate();
+  // hook functions
+  const { albumData } = useAlbum(params.id, false);
+  const { createReviewAlbum, error } = useCreateReviewAlbum();
+  // state
   const [allImages, setAllImages] = useState([]);
   const [likedImages, setLikedImages] = useState([]);
   const [dislikedImages, setDislikedImages] = useState([]);
-  // hook functions
-  const { albumData } = useAlbum(params.id);
-  const { createReviewAlbum, loading, error, finished } =
-    useCreateReviewAlbum();
 
   // when we have the album data images put it in a state
   useEffect(() => {
@@ -32,33 +32,37 @@ const ReviewAlbum = () => {
     }
   }, [albumData]);
 
+  // add the image to the liked image array
   const likeImage = (data) => {
     const newAllImages = allImages.filter((img) => img.id !== data.id);
     setAllImages(newAllImages);
-
     setLikedImages([...likedImages, data]);
   };
 
+  // add the image to the dislike array
   const dislikeImage = (data) => {
     const newAllImages = allImages.filter((img) => img.id !== data.id);
     setAllImages(newAllImages);
     setDislikedImages([...dislikedImages, data]);
   };
 
+  // remove from the like array
   const deleteFromLiked = (id) => {
     const removedImage = likedImages.filter((img) => img.id === id);
     const newImages = likedImages.filter((img) => img.id !== id);
     setAllImages([...allImages, removedImage[0]]);
     setLikedImages(newImages);
   };
+  // remove from the dislike array
   const deleteFromDisliked = (id) => {
     const removedImage = dislikedImages.filter((img) => img.id === id);
     const newImages = dislikedImages.filter((img) => img.id !== id);
     setAllImages([...allImages, removedImage[0]]);
     setDislikedImages(newImages);
   };
-
+  // handle the attempt to create a new review album
   const handleSubmit = async () => {
+    // create dates to make render the date and time of the review
     let today = new Date();
     let date =
       today.getFullYear() +
@@ -69,7 +73,6 @@ const ReviewAlbum = () => {
     let time =
       today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     let dateOfCreation = ` ${date.toString()} at ${time.toString()}`;
-    console.log("dateOfCreation: ", dateOfCreation);
 
     // create review album
     createReviewAlbum("albums", {
@@ -142,8 +145,7 @@ const ReviewAlbum = () => {
           <button className="btn-primary bg-green-600" onClick={handleSubmit}>
             Submit Images
           </button>
-          {finished && <span className="text-green-600">Created :D</span>}
-          {error && <span className="text-rose-600">NOT Created :(</span>}
+          {error && <span className="warning-popup">NOT Created :(</span>}
         </div>
       )}
 

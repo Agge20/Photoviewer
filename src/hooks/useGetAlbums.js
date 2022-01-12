@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+// firebase
 import { db } from "../firebase";
 import {
   collection,
@@ -7,19 +8,20 @@ import {
   orderBy,
   where,
 } from "firebase/firestore";
+// context
 import { useAuthContext } from "../context/AuthContext";
 
 const useGetAlbums = () => {
   const { user } = useAuthContext();
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(null);
-
+  // create a reference to the entire albums-collection
   const colRef = collection(db, "albums");
 
   // subsrcribe to albums when their is a user, and get that users albums
   useEffect(() => {
     if (user) {
-      console.log(user.uid);
+      // fetch all the albums where the current user id matches the "createdBy" id
       const albumsQuery = query(
         colRef,
         where("createdBy", "==", user.uid),
@@ -45,9 +47,6 @@ const useGetAlbums = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  useEffect(() => {
-    console.log("albums changed: ", albums);
-  }, [albums]);
   return {
     loading,
     albums,

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+// firebase
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -14,6 +15,7 @@ const useAuthContext = () => {
 };
 
 const AuthContextProvider = ({ children }) => {
+  // this is the global user-state
   const [user, setUser] = useState(null);
 
   // function to register a new user
@@ -26,14 +28,14 @@ const AuthContextProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  // function to logout the user
   const logout = () => {
     return signOut(auth);
   };
 
   useEffect(() => {
-    // run code on auth-change
+    // run code on auth-change, and set the user to the new auth user
     onAuthStateChanged(auth, (user) => {
-      console.log("user changed. User is now: ", user);
       setUser(user);
     });
   }, []);

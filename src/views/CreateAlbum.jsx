@@ -1,14 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
+// hooks
 import useCreateAlbum from "../hooks/useCreateAlbum";
 
 const CreateAlbum = ({ images }) => {
   const { createAlbum, finished, setFinished, loading, error } =
     useCreateAlbum();
   const [message, setMessage] = useState(null);
-
+  const [albumCover, setAlbumCover] = useState(null);
   const albumTitle = useRef();
   const albumDes = useRef();
-  const [albumCover, setAlbumCover] = useState(null);
 
   // on file cover image file change
   const onCoverChange = (e) => {

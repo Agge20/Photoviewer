@@ -1,6 +1,8 @@
+// packages
 import React, { useState, useEffect } from "react";
-import NavbarLinks from "./partial/NavbarLinks";
 import { useNavigate } from "react-router-dom";
+// components
+import NavbarLinks from "./partial/NavbarLinks";
 
 const Navbar = () => {
   const navigate = useNavigate();

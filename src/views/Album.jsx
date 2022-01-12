@@ -1,13 +1,16 @@
 import React, { useState, useRef } from "react";
+// packages
 import { useParams } from "react-router-dom";
+import { SRLWrapper } from "simple-react-lightbox";
+import ProgressBar from "@ramonak/react-progress-bar";
+//hooks
 import useAddImageToAlbum from "../hooks/useAddImageToAlbum";
 import useAlbum from "../hooks/useAlbum";
-import useUpdateAlbum from "../hooks/useUpdateAlbum.js";
-import { SRLWrapper } from "simple-react-lightbox";
-import CreateAlbumFromImgs from "../components/CreateAlbumFromImgs";
 import useDeleteAlbum from "../hooks/useDeleteAlbum";
 import useDeleteImage from "../hooks/useDeleteImage";
-import ProgressBar from "@ramonak/react-progress-bar";
+import useUpdateAlbum from "../hooks/useUpdateAlbum.js";
+// components
+import CreateAlbumFromImgs from "../components/CreateAlbumFromImgs";
 
 // svg
 import Chain from "../svg/Chain";
@@ -17,13 +20,14 @@ import TrashcanWhite from "../svg/TrashcanWhite";
 const Album = () => {
   const params = useParams();
   const newTitle = useRef();
+
   const [showTitleEditor, setShowTitleEditor] = useState(false);
   const [newAlbumImages, setNewAlbumImages] = useState([]);
-  const { deleteAlbum } = useDeleteAlbum();
-  const { deleteImage } = useDeleteImage();
+  const { deleteAlbum, error: deleteAlbumError } = useDeleteAlbum();
+  const { deleteImage, error: deleteImageError } = useDeleteImage();
 
   const { updateTitle } = useUpdateAlbum(params.id);
-  const { albumData, unAuthUser } = useAlbum(params.id);
+  const { albumData, unAuthUser } = useAlbum(params.id, true);
   const {
     loading,
     error: imageUploadErr,
@@ -31,9 +35,10 @@ const Album = () => {
     progress,
   } = useAddImageToAlbum();
 
+  // on images files change
   const onFileChange = async (e) => {
     const files = e.target.files;
-
+    // if user has added atleast one image
     if (files.length > 0) {
       // loop through files
       for (let i = 0; i < files.length; i++) {
@@ -57,10 +62,11 @@ const Album = () => {
     setNewAlbumImages([...newAlbumImages, data]);
   };
 
+  // delete the entire current album
   const onDelete = () => {
     deleteAlbum(params.id);
   };
-
+  // handle a specific image and send its id
   const handleDeleteImage = (imgId) => {
     deleteImage(imgId, params.id);
   };
@@ -68,24 +74,33 @@ const Album = () => {
   return (
     <>
       <div className="w-full mt-12">
-        <div className="flex flex-col justify-center items-center">
-          <h2 className="header-md">Review Link</h2>
-          <div className="inline text-center p-2 shadow-md bg-primary text-white">
-            <div className="flex flex-col justify-center items-center">
-              <span className="whitespace-pre-line">{`${window.origin}/review-album/${params.id}`}</span>
-              <div
-                className="ml-2 mt-2 cursor-pointer hover:opacity-75"
-                onClick={() => {
-                  navigator.clipboard.writeText(
-                    `${window.origin}/review-album/${params.id}`
-                  );
-                }}
-              >
-                <Chain />
+        {unAuthUser && (
+          <div className="header-md sm:header-lg text-red-600 sm:text-red-600 text-center">
+            You are not the owner of this album...
+          </div>
+        )}
+        {!unAuthUser && (
+          <div className="flex flex-col justify-center items-center">
+            <h2 className="header-md">Review Link</h2>
+            <div className="inline text-center p-2 shadow-md bg-primary text-white">
+              <div className="flex flex-col justify-center items-center">
+                <span className="whitespace-pre-line">{`${window.origin}/review-album/${params.id}`}</span>
+                <div
+                  className="ml-2 mt-2 cursor-pointer hover:opacity-75"
+                  onClick={() => {
+                    navigator.clipboard.writeText(
+                      `${window.origin}/review-album/${params.id}`
+                    );
+                  }}
+                >
+                  <Chain />
+                </div>
               </div>
             </div>
+            {deleteAlbumError && <span>{deleteAlbumError.msg}</span>}
+            {deleteImageError && <span>{deleteImageError.msg}</span>}
           </div>
-        </div>
+        )}
 
         {albumData && (
           <div className="flex flex-col items-center justify-center max-w-96">
@@ -157,39 +172,22 @@ const Album = () => {
           </div>
         )}
       </div>
-
-      <div className="mb-8 flex flex-col sm:flex-row justify-center items-center">
-        <button
-          className="btn-warning--yellow flex w-48"
-          onClick={() => setNewAlbumImages([])}
-        >
-          Clear Selected
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 ml-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      {!unAuthUser && (
+        <div className="mb-8 flex flex-col sm:flex-row justify-center items-center">
+          <button
+            className="btn-warning--yellow flex w-48"
+            onClick={() => setNewAlbumImages([])}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-            />
-          </svg>
-        </button>
-        <button
-          className="bg-rose-600 btn-primary flex sm:ml-2 w-48"
-          onClick={() => onDelete()}
-        >
-          Delete Album <TrashcanWhite />
-        </button>
-      </div>
-      {unAuthUser && (
-        <h2 className="header-md sm:header-lg text-red-600 sm:text-red-600 text-center">
-          You are not the owner of this album
-        </h2>
+            Clear Selected
+            <TrashcanWhite />
+          </button>
+          <button
+            className="bg-rose-600 btn-primary flex sm:ml-2 w-48"
+            onClick={() => onDelete()}
+          >
+            Delete Album <TrashcanWhite />
+          </button>
+        </div>
       )}
 
       <div className="w-full p-5">

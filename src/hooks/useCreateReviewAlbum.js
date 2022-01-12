@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { db } from "../firebase";
 
+// firebase
+import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
+// function for creating a new album when the reviewer has submitted his/her review
 const useCreateReviewAlbum = () => {
-  const [finished, setFinished] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const createReviewAlbum = async (collectionName, albumData) => {
     setError(null);
-    setFinished(false);
     setLoading(true);
     // get the collection reference
     const colRef = collection(db, collectionName);
@@ -19,16 +19,14 @@ const useCreateReviewAlbum = () => {
         ...albumData,
         createAt: serverTimestamp(),
       });
-      setFinished(true);
+
       setLoading(false);
     } catch (err) {
       setLoading(false);
-      setFinished(false);
       setError(err);
     }
   };
   return {
-    finished,
     error,
     loading,
     createReviewAlbum,
