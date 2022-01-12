@@ -7,6 +7,7 @@ import { SRLWrapper } from "simple-react-lightbox";
 import CreateAlbumFromImgs from "../components/CreateAlbumFromImgs";
 import useDeleteAlbum from "../hooks/useDeleteAlbum";
 import useDeleteImage from "../hooks/useDeleteImage";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 // svg
 import Chain from "../svg/Chain";
@@ -23,13 +24,25 @@ const Album = () => {
 
   const { updateTitle } = useUpdateAlbum(params.id);
   const { albumData } = useAlbum(params.id);
-  const { loading, error: imageUploadErr, addImage } = useAddImageToAlbum();
+  const {
+    loading,
+    error: imageUploadErr,
+    addImage,
+    progress,
+  } = useAddImageToAlbum();
 
   const onFileChange = async (e) => {
-    console.log(e.target.files[0]);
-    if (e.target.files[0]) {
-      await addImage(params.id, e.target.files[0]);
+    const files = e.target.files;
+
+    if (files.length > 0) {
+      // loop through files
+      for (let i = 0; i < files.length; i++) {
+        // trying to add each image to the album
+        await addImage(params.id, e.target.files[i]);
+      }
     }
+
+    console.log("e.target.files: ", e.target.files);
   };
 
   // to change the current album title
@@ -127,12 +140,18 @@ const Album = () => {
               <input
                 id="cover"
                 type="file"
+                multiple
                 //onChange={onCoverChange}
                 className="input sm:w-64 mb-2"
                 onChange={onFileChange}
                 disabled={loading}
               />
             </label>
+            <div className="w-64 sm:w-96">
+              {progress > 0 && (
+                <ProgressBar completed={progress} bgColor="#5863F8" />
+              )}
+            </div>
 
             {/* create new album in album */}
             <CreateAlbumFromImgs images={newAlbumImages} />
