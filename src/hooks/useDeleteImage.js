@@ -31,10 +31,11 @@ const useDeleteImage = () => {
       collection(db, "albums"),
       where("createdBy", "==", user.uid)
     );
+    // get all the user albums
     const usersAlbumsData = await getDocs(q);
     const usersAlbums = [];
+    // push each albums object data into the userAlbums array
     usersAlbumsData.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
       usersAlbums.push(doc.data());
     });
 
@@ -44,7 +45,7 @@ const useDeleteImage = () => {
         usersImagesPaths.push(album.images[i].imagePath);
       }
     });
-    console.log("usersImages: ", usersImagesPaths);
+
     // return all the images that shall remain
     const newAlbumImages = albumData.images.filter((img) => img.id !== id);
     // here we check if the image we are trying to delete are present in more than one album

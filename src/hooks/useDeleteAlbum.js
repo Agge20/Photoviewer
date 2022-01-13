@@ -24,7 +24,6 @@ const useDeleteAlbum = () => {
     for (const img of albumData.images) {
       // create a reference to the file to delete
       const imageRef = ref(storage, img.imagePath);
-
       try {
         // try to delete the image from storage
         await deleteObject(imageRef);
@@ -33,9 +32,13 @@ const useDeleteAlbum = () => {
       }
     }
 
+    const coverImageRef = ref(storage, albumData.coverPath);
     const albumRef = doc(db, "albums", id);
-    // try to delete the album document
+
     try {
+      // try to delete the album cover image
+      await deleteObject(coverImageRef);
+      // try to delete the album document
       await deleteDoc(albumRef);
       navigate("/albums");
     } catch (err) {

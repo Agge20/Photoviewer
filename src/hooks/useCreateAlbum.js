@@ -37,21 +37,6 @@ const useCreateAlbum = () => {
     try {
       // wait for uploading the cover image
       await uploadBytes(coverRef, coverFile);
-      // try to upload image from imagePath
-      for (let i = 0; i < images.length; i++) {
-        let FILE;
-        fetch(
-          "https://firebasestorage.googleapis.com/v0/b/photoviewer-7f53f.appspot.com/o/albums%2F7XtzFURQjYNyqVew7Nzw%2F6c635408-4053-4ecb-91b0-b6b47ea23879.jpg?alt=media&token=9a89033a-53fa-414a-9b0f-cae2a07e4435.jpg"
-        ).then(async (response) => {
-          const contentType = response.headers.get("content-type");
-          const blob = await response.blob();
-          const file = new File([blob], "test", { contentType });
-          // access file here
-          FILE = file;
-        });
-
-        await uploadBytes(ref(storage, `albums/test/}`, FILE));
-      }
 
       // wait for getting the downloadURL from the newly created cover image
       const downURL = await getDownloadURL(coverRef);
@@ -60,6 +45,7 @@ const useCreateAlbum = () => {
         ...albumData,
         images: [...images],
         coverUrl: downURL,
+        coverPath: `covers/${coverId}`,
         createdAt: serverTimestamp(),
         createdBy: user.uid,
         coverId,
