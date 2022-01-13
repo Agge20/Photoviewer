@@ -59,7 +59,6 @@ const Album = () => {
 
   // to add images to a new album
   const addNewAlbumImage = (data) => {
-    console.log("data addNewAlbumImage: ", data);
     setNewAlbumImages([...newAlbumImages, data]);
   };
 
