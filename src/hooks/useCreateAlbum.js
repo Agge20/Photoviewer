@@ -45,6 +45,7 @@ const useCreateAlbum = () => {
         ...albumData,
         images: [...images],
         coverUrl: downURL,
+        coverPath: `covers/${coverId}`,
         createdAt: serverTimestamp(),
         createdBy: user.uid,
         coverId,
