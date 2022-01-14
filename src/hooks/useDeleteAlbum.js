@@ -50,7 +50,6 @@ const useDeleteAlbum = () => {
       // create a reference to the file to delete
       const imageRef = ref(storage, img.imagePath);
       const usersImagesPaths = [];
-      console.log("new img of albumData.images", img);
       // this code is a little confusing, what it does is checks if there are more than one image
       // using the same imagePath
       // loop through each user album
@@ -77,10 +76,26 @@ const useDeleteAlbum = () => {
 
     const coverImageRef = ref(storage, albumData.coverPath);
     const albumRef = doc(db, "albums", id);
-
+    // try to delete the album cover image
     try {
-      // try to delete the album cover image
-      await deleteObject(coverImageRef);
+      // check if the cover image is used by more than one album, if true dont delete from storage
+      const usersCoverPaths = [];
+      // this code is a little confusing, what it does is checks if there are more than one image
+      // using the same imagePath
+      // loop through each user album
+      usersAlbums.forEach((albumToCheck) => {
+        // loop through each image object in the album
+        for (let i = 0; i < albumToCheck.images.length; i++) {
+          // check if the image path matches the imagepath we want to delete, it true add to array
+          if (albumToCheck.coverPath === albumData.coverPath) {
+            usersCoverPaths.push(albumToCheck.images[i].imagePath);
+          }
+        }
+      });
+      // if there is only one or less albums using this cover path, delete it
+      if (usersCoverPaths.length <= 1) {
+        await deleteObject(coverImageRef);
+      }
       // try to delete the album document
       await deleteDoc(albumRef);
       navigate("/albums");
