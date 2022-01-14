@@ -39,10 +39,14 @@ const useDeleteImage = () => {
       usersAlbums.push(doc.data());
     });
 
+    // this code is a little confusing, what it does is checks if there are more than one image
+    // using the same imagePath
     const usersImagesPaths = [];
     usersAlbums.forEach((album) => {
       for (let i = 0; i < album.images.length; i++) {
-        usersImagesPaths.push(album.images[i].imagePath);
+        if (album.images[i].imagePath === imageToDelete[0].imagePath) {
+          usersImagesPaths.push(album.images[i].imagePath);
+        }
       }
     });
 
@@ -51,6 +55,7 @@ const useDeleteImage = () => {
     // here we check if the image we are trying to delete are present in more than one album
     // if it is then we ONLY delete in the document and not in storage
     // if it is NOT present in more than one album then we delete the doc and the image in storage
+
     if (usersImagesPaths.length > 1) {
       try {
         // try and delete only the image from the document
@@ -61,6 +66,7 @@ const useDeleteImage = () => {
         setError(err);
       }
     }
+
     // if the image is only present in one album then delete it from storage
     else {
       try {
