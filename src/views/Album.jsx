@@ -138,7 +138,7 @@ const Album = () => {
                     <input
                       className="border-2 w-48 ml-5 rounded-full indent-2"
                       type="text"
-                      placeholder="test"
+                      placeholder="New title..."
                       maxLength="19"
                       ref={newTitle}
                       onKeyDown={(e) => e.key === "Enter" && handleTitleEdit()}
